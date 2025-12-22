@@ -1,0 +1,45 @@
+{
+  "version": "0",
+  "id": "87654321-4321-4321-4321-210987654321",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.s3",
+  "account": "123456789012",
+  "time": "2024-01-15T14:30:00Z",
+  "region": "us-east-1",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.08",
+    "userIdentity": {
+      "type": "IAMUser",
+      "principalId": "AIDAJ45Q7YFFAREXAMPLE",
+      "arn": "arn:aws:iam::123456789012:user/developer",
+      "accountId": "123456789012",
+      "userName": "developer"
+    },
+    "eventTime": "2024-01-15T14:30:00Z",
+    "eventSource": "s3.amazonaws.com",
+    "eventName": "DeletePublicAccessBlock",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "203.0.113.12",
+    "userAgent": "[aws-cli/2.0.0]",
+    "requestParameters": {
+      "bucketName": "nebula-test-sensitive-bucket"
+    },
+    "responseElements": null,
+    "additionalEventData": {
+      "SignatureVersion": "SigV4",
+      "CipherSuite": "ECDHE-RSA-AES128-GCM-SHA256",
+      "bytesTransferredIn": 0,
+      "AuthenticationMethod": "AuthHeader",
+      "x-amz-id-2": "EXAMPLE123/5678abcdefghijklambdaisawesome/mnopqrstuvwxyzABCDEFGH",
+      "bytesTransferredOut": 0
+    },
+    "requestID": "EXAMPLE987654321",
+    "eventID": "87654321-4321-4321-4321-210987654321",
+    "readOnly": false,
+    "eventType": "AwsApiCall",
+    "managementEvent": true,
+    "recipientAccountId": "123456789012",
+    "eventCategory": "Management"
+  }
+}

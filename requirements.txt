@@ -1,0 +1,17 @@
+# Core dependencies
+boto3>=1.34.0
+aws-cdk-lib>=2.130.0
+constructs>=10.0.0
+
+# Development dependencies
+pytest>=7.4.0
+pytest-mock>=3.11.0
+black>=23.0.0
+mypy>=1.0.0
+python-dotenv>=1.0.0
+
+# Serialization
+pydantic>=2.0.0  # We'll use dataclasses for now, but pydantic is great for validation
+
+# Testing
+freezegun>=1.2.0
