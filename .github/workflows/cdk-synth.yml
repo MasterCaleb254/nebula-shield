@@ -1,0 +1,40 @@
+name: CDK Synthesis
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'infra/**'
+      - 'requirements.txt'
+      - 'pyproject.toml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'infra/**'
+
+jobs:
+  synth:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with: 
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .[dev]
+    
+    - name: CDK Synthesis
+      run: |
+        cd infra
+        cdk synth --app "python app.py" --output cdk.out
+      
+    - name: Upload CDK output
+      uses: actions/upload-artifact@v3
+      with:
+        name: cdk-output
+        path: infra/cdk.out/
