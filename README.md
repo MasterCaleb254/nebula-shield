@@ -130,3 +130,23 @@ We now have a **fully functional local simulation environment** that:
 5. ✅ **Provides audit trail** of what would happen in production
 
 **Ready to implement the Decision Engine next?** This is the state machine that decides whether to auto-remediate or require approval, based on the risk level of each finding.
+## 📊 Project Status
+
+[![CI Pipeline](https://github.com/MasterCaleb254/nebula-shield/actions/workflows/ci.yml/badge.svg)](https://github.com/MasterCaleb254/nebula-shield/actions/workflows/ci.yml)
+[![CDK Synthesis](https://github.com/MasterCaleb254/nebula-shield/actions/workflows/cdk-synth.yml/badge.svg)](https://github.com/MasterCaleb254/nebula-shield/actions/workflows/cdk-synth.yml)
+![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+## 🏆 Features Implemented
+
+| Component              | Status | Notes                                      |
+|------------------------|--------|--------------------------------------------|
+| Core Data Models       | ✅ Complete | Finding, Event, RemediationPlan            |
+| S3 Detector            | ✅ Complete | Public access detection                    |
+| Simulation Framework   | ✅ Complete | Local testing harness                      |
+| CI/CD Pipeline         | ✅ Complete | GitHub Actions                             |
+| Documentation          | ✅ Complete | Architecture, threat model                 |
+| CDK Infrastructure     | 🔄 Next | Infrastructure as Code                     |
+| Decision Engine        | 🔄 Next | State machine implementation               |
+| IAM/SG Detectors       | 🔄 Planned | Additional rule types                      |
+| Dashboard              | 🔄 Planned | QuickSight integration                     |
