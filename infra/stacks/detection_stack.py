@@ -48,7 +48,7 @@ class DetectionStack(Stack):
             self, "DetectionLambda",
             runtime=lambda_.Runtime.PYTHON_3_11,
             handler="handler.lambda_handler",
-            code=lambda_.Code.from_asset("../src/detection"),
+            code=lambda_.Code.from_asset("lambdas/detection"),
             timeout=Duration.seconds(30),
             memory_size=256,
             role=detection_role,
