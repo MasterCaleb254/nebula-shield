@@ -23,11 +23,14 @@ def synthesize_stacks():
     
     # Run CDK synth
     try:
+        # On Windows, we need shell=True to find cdk.cmd
+        use_shell = sys.platform == 'win32'
         result = subprocess.run(
             ["cdk", "synth", "--all"],
             capture_output=True,
             text=True,
-            check=True
+            check=True,
+            shell=use_shell
         )
         
         print("✅ Synthesis completed successfully!")
