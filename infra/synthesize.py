@@ -112,3 +112,94 @@ cd nebula-shield/infra
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\\Scripts\\activate
 pip install -r requirements.txt
+```
+
+### 2. Configure context
+Update `cdk.json` context values:
+- `account`: Your AWS account ID
+- `region`: Deployment region
+- `environment`: dev/staging/prod
+- `dry_run_mode`: true/false
+- `enabled_rules`: List of rules to enable
+
+### 3. Bootstrap CDK (first time only)
+```bash
+cdk bootstrap aws://ACCOUNT-NUMBER/REGION
+```
+
+### 4. Deploy in order
+```bash
+# Deploy Core Stack
+cdk deploy NebulaShieldCore-dev --require-approval never
+
+# Deploy Detection Stack
+cdk deploy NebulaShieldDetection-dev --require-approval never
+
+# Deploy Observability Stack
+cdk deploy NebulaShieldObservability-dev --require-approval never
+
+# Deploy Remediation Stack (initially in dry-run mode)
+cdk deploy NebulaShieldRemediation-dev --require-approval never
+```
+
+## Safety Controls
+
+### Dry Run Mode
+By default, Nebula Shield runs in dry-run mode. This means:
+- Findings are detected and logged
+- Remediation plans are created
+- No actual AWS resources are modified
+- All intended API calls are logged
+
+### Enable Auto-Remediation
+To enable auto-remediation:
+1. Update `cdk.json`: `"dry_run_mode": false`
+2. Deploy with: `cdk deploy NebulaShieldRemediation-dev`
+3. Monitor closely in CloudWatch
+
+### Approval Workflow
+For high-risk findings:
+- Findings go to PENDING_APPROVAL state
+- Manually approve via CLI/Console
+- Remediation executes after approval
+
+## Monitoring
+- **CloudWatch Dashboard**: Shows findings, remediations, performance
+- **SNS Topics**: High severity and operational alerts
+- **CloudWatch Logs**: Detailed execution logs with correlation IDs
+
+## Rollback Procedure
+If issues occur:
+1. Set `dry_run_mode` to true in `cdk.json`
+2. Redeploy Remediation Stack
+3. Nebula Shield will stop making changes
+4. Review logs and fix configuration
+
+## Security Notes
+- IAM roles follow least privilege principle
+- No permission expansion during remediation
+- Audit logs are immutable
+- Encryption at rest with KMS
+"""
+
+    with open("DEPLOYMENT_GUIDE.md", "w", encoding="utf-8") as f:
+        f.write(guide)
+    
+    print("✅ Deployment guide generated: DEPLOYMENT_GUIDE.md")
+
+if __name__ == "__main__":
+    print("🚀 Nebula Shield CDK Synthesis Tool")
+    print("=" * 50)
+    
+    if synthesize_stacks():
+        validate_iam_policies()
+        generate_deployment_guide()
+        
+        print("\n" + "=" * 50)
+        print("🎉 Synthesis completed successfully!")
+        print("\nNext steps:")
+        print("1. Review CloudFormation templates in cdk.out/")
+        print("2. Check deployment guide: DEPLOYMENT_GUIDE.md")
+        print("3. Deploy to AWS when ready")
+    else:
+        sys.exit(1)
