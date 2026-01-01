@@ -5,6 +5,14 @@ import sys
 import os
 from pathlib import Path
 
+# Force UTF-8 encoding for stdout on Windows
+if sys.stdout.encoding != 'utf-8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except AttributeError:
+        # Fallback for older python versions or weird environments
+        pass
+
 def synthesize_stacks():
     """Synthesize all CDK stacks."""
     print("🔨 Synthesizing Nebula Shield CloudFormation templates...")
